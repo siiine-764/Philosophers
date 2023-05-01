@@ -9,3 +9,14 @@ Mr.Philo :
 
 Process vs Thread : 
 https://www.youtube.com/watch?v=4rLW7zg21gI
+
+    My philos : 
+Niccolo Machiavelli :
+
+Socrates :
+
+Aristotle Aristotle :
+
+Sigmund Freud :
+
+Ibn Khaldun :
