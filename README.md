@@ -44,3 +44,6 @@ Aristotle Aristotle :
 Sigmund Freud :
 
 Ibn Khaldun :
+
+![philo](https://user-images.githubusercontent.com/80540449/235598793-c693052b-2c36-461d-834e-2a8b8166560c.jpg)
+
