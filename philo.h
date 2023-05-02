@@ -1,8 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
+/*   Updated: 2023/05/02 07:03:09 by mayache-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
-typedef struct s_main
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
+typedef struct s_philo
 {
-    
-} t_main;
+	int				id;
+	int				fork_left;
+	int				fork_right;
+	int				meal_eated;
+	long long		last_meal;
+	pthread_t		number_of_philo;
+	struct s_info	*info;
+} t_philo;
+
+typedef struct s_info
+{
+    int             nbr_of_philos;
+    int             nbr_of_meals;
+    int             tm_to_slp;
+    int             tm_to_eat;
+    int             tm_to_die;
+    int             is_died;
+    int             all_eat;
+    long            start_tm;
+    t_philo			*philo;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	decalre;
+	pthread_mutex_t	*time;
+	pthread_mutex_t	*eating;
+} t_info;
+
+/*####### functions to check arguments #######*/
+void		check_positive(char **av);
+
+/*####### functions to init #######*/
+void		init_args(t_info *args, char **av);
+int			alloc_args(t_info *args, char **av);
+int			init_main(t_info *args, char **av);
+
+/*########## functions to start   #########*/
+void	*start_routine(void *i);
+
+/*####### functions to utils #######*/
+int			ft_atoi(const char *str);
+long long	current_time(void);
 #endif

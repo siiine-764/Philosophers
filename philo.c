@@ -1,31 +1,33 @@
-#include <stdio.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/01 19:30:43 by mayache-          #+#    #+#             */
+/*   Updated: 2023/05/02 05:29:22 by mayache-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	check_positive(char **a)
-{
-	int	i;
-
-	i = 1;
-	while (a[i])
-	{
-		if (ft_atoi(a[i]) <= 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
+#include "./philo.h"
 
 int	main(int ac, char **av)
 {
-	t_main	*args;
+	t_info	*args;
 
 	if (ac == 5 || ac == 6)
 	{
-		if (!check_positive(av))
-			return (0);
-		args = malloc(sizeof(t_main));
+		check_positive(av);
+		
+		args = malloc(sizeof(t_info));
 		if (!args)
 			return (0);
+		if (!init_main(args, av))
+		{
+			free(args);
+			return (0);
+		}
 	}
-	return (1);
+	return (0);
 }
