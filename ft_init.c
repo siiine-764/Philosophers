@@ -51,7 +51,7 @@ int	init_main(t_info *args, char **av)
 	if (!alloc_args(args, av))
 		return (0);
 	init_args(args, av);
-		if (pthread_mutex_init(&args->decalre, NULL))
+	if (pthread_mutex_init(&args->decalre, NULL))
 		return (0);
 	i = 0;
 	while (i < args->nbr_of_philos)
