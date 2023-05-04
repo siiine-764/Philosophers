@@ -45,12 +45,7 @@ Sigmund Freud:
 
 Ibn Khaldun:
 
-<h1> Source: </h1>
-    https://medium.com/swlh/the-dining-philosophers-problem-bbdb92e6b788
-
-<<<<<<< HEAD
-=======
-Ibn Khaldun :
+Ibn Khaldun:
 
 ![philo](https://user-images.githubusercontent.com/80540449/235598793-c693052b-2c36-461d-834e-2a8b8166560c.jpg)
 
@@ -63,4 +58,5 @@ usage :
     ./philo_one number_philosopher time_to_die time_to_eat time_to_sleep [number_of_time_each_philosophers_must_eat] 
 arguments in square brackets are not required (number_of_time_each_philosophers_must_eat)
 
->>>>>>> 9352cadfe1665275772b03a16c30d960399eb90e
+<h1> Source: </h1>
+    https://medium.com/swlh/the-dining-philosophers-problem-bbdb92e6b788
