@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/02 07:03:09 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/04 09:04:03 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+
 typedef struct s_philo
 {
 	int				id;
 	int				fork_left;
 	int				fork_right;
 	int				meal_eated;
+	int				time_of_eats;
 	long long		last_meal;
-	pthread_t		number_of_philo;
+	pthread_t		nbr_of_philos;
 	struct s_info	*info;
 } t_philo;
 
@@ -56,8 +58,13 @@ int			init_main(t_info *args, char **av);
 
 /*########## functions to start   #########*/
 void	*start_routine(void *i);
-
+int		start_thread(t_info *args);
+void	sleep_hypnos(t_info *args);
+void	eat_eta(t_info *args);
+int		died_thanatos(t_info *args);
+void	think_descartes(t_info *args);
 /*####### functions to utils #######*/
 int			ft_atoi(const char *str);
 long long	current_time(void);
+void		print_routine(t_info *args, char *a, int i);
 #endif

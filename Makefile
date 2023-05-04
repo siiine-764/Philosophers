@@ -5,6 +5,7 @@ CFLAGS 	= -Wall -Wextra -Werror
 SRCS =	philo.c\
 		utils.c\
 		ft_init.c\
+		ft_start.c\
 
 all: $(NAME)
 

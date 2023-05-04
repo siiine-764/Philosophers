@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 19:30:43 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/02 05:29:22 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/04 08:37:14 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int ac, char **av)
 	if (ac == 5 || ac == 6)
 	{
 		check_positive(av);
-		
 		args = malloc(sizeof(t_info));
 		if (!args)
 			return (0);
@@ -28,6 +27,7 @@ int	main(int ac, char **av)
 			free(args);
 			return (0);
 		}
+		start_thread(args);
 	}
 	return (0);
 }

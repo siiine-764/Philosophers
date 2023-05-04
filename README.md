@@ -33,14 +33,18 @@ repeat from the beginning.
 However, they each will think for an undetermined amount of time and may end up holding a left fork thinking, staring at the right side of the plate, unable to eat because there is no right fork, until they starve.
 
 Resource starvation, mutual exclusion and livelock are other types of sequence and access problem. 
-<h1>My philos : </h1> 
+<h1>My philos: </h1> 
 
-Niccolo Machiavelli :
+Niccolo Machiavelli:
 
-Socrates :
+Socrates:
 
-Aristotle Aristotle :
+Aristotle Aristotle:
 
-Sigmund Freud :
+Sigmund Freud:
 
-Ibn Khaldun :
+Ibn Khaldun:
+
+<h1> Source: </h1>
+    https://medium.com/swlh/the-dining-philosophers-problem-bbdb92e6b788
+
