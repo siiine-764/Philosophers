@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:43:00 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/04 03:28:07 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/07 07:04:17 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_args(t_info *args, char **av)
 	args->tm_to_die = ft_atoi(av[2]);
 	args->tm_to_eat = ft_atoi(av[3]);
 	args->tm_to_slp = ft_atoi(av[4]);
-	args->is_died = 0;
+	// args->is_died = 0;
 	args->all_eat = 0;
 	args->start_tm = current_time();
 	if (av[5] != 0)
@@ -51,17 +51,14 @@ int	init_main(t_info *args, char **av)
 	if (!alloc_args(args, av))
 		return (0);
 	init_args(args, av);
-	if (pthread_mutex_init(&args->decalre, NULL))
-		return (0);
+	// if (pthread_mutex_init(&args->decalre, NULL))
+	// 	return (0);
 	i = 0;
 	while (i < args->nbr_of_philos)
 	{
-		if (pthread_mutex_init(&args->forks[i], NULL))
-			return (0);
-		if (pthread_mutex_init(&args->time[i], NULL))
-			return (0);
-		if (pthread_mutex_init(&args->eating[i], NULL))
-			return (0);
+		pthread_mutex_init(&args->forks[i], NULL);
+		pthread_mutex_init(&args->time[i], NULL);
+		pthread_mutex_init(&args->eating[i], NULL);
 		i++;
 	}
 	return (1);

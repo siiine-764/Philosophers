@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/04 09:29:52 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/07 05:59:52 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,8 @@ void	print_routine(t_info *args, char *a, int i)
 
 void	sleep_hypnos(t_info *args)
 {
-	// long long	i;
-
-	// i = current_time();
-	// while (1)
-	// {
-	// 	if (current_time() - i >= slp)
-	// 		break ;
 	print_routine(args, "is sleeping", args->philo->id);
 	usleep(args->tm_to_slp * 1000);
-	// }
 }
 
 void	think_descartes(t_info *args)
@@ -84,22 +76,40 @@ void	think_descartes(t_info *args)
 
 void	eat_eta(t_info *args)
 {
+	print_routine(args, "is eating", args->philo->id);
+	pthread_mutex_lock(&args->time[args->philo->id - 1]);
+	args->philo->last_meal = current_time();
+	pthread_mutex_unlock(&args->time[args->philo->id - 1]);
+	pthread_mutex_lock(&args->eating[args->philo->id - 1]);
+	args->philo->meal_eated++;
+	pthread_mutex_unlock(&args->eating[args->philo->id - 1]);
 	pthread_mutex_lock(&args->forks[args->philo->fork_left]);
 	print_routine(args, "has take a fork", args->philo->id);
 	pthread_mutex_lock(&args->forks[args->philo->fork_right]);
 	print_routine(args, "has taken a fork", args->philo->id);
-	print_routine(args, "is eating", args->philo->id);
 	usleep(args->tm_to_eat * 1000);
 	pthread_mutex_unlock(&args->forks[args->philo->fork_left]);
 	pthread_mutex_unlock(&args->forks[args->philo->fork_right]);
-	args->philo->time_of_eats++;
+	// args->philo->time_of_eats++;
 }
 
-int	died_thanatos(t_info *args)
+// int	died_thanatos(t_info *args)
+// {
+// 	int i = 0;
+// 	// pthread_mutex_lock(&args->decalre);
+// 	// i = args->is_died;
+// 	// pthread_mutex_unlock(&args->decalre);
+// 	return (i);
+// }
+
+int check_died(t_info *args)
 {
-	int i = 0;
-	pthread_mutex_lock(&args->decalre);
-	i = args->is_died;
-	pthread_mutex_unlock(&args->decalre);
-	return (i);
+	pthread_mutex_lock(&args->is_died);
+	while ((args->tm_to_die) == 1)
+	{
+		pthread_mutex_unlock(&args->is_died);
+		return (1);
+	}
+	pthread_mutex_unlock(&args->is_died);
+	return (0);
 }
