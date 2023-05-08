@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/07 05:59:52 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:31:54 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,27 @@ void	print_routine(t_info *args, char *a, int i)
 	pthread_mutex_unlock(&args->decalre);
 }
 
-void	sleep_hypnos(t_info *args)
+int	sleep_hypnos(t_info *args)
 {
 	print_routine(args, "is sleeping", args->philo->id);
 	usleep(args->tm_to_slp * 1000);
+	if (check_died(args) == 1)
+		return (1);
+	return (0);
 }
 
-void	think_descartes(t_info *args)
+int	think_descartes(t_info *args)
 {
-	print_routine(args, "is thinking", args->philo->id);	
+	print_routine(args, "is thinking", args->philo->id);
+	if (check_died(args) == 1)
+		return(1);
+	return(0);
 }
 
-void	eat_eta(t_info *args)
+int	eat_eta(t_info *args)
 {
+	if (check_died(args) == 1)
+		return(1);
 	print_routine(args, "is eating", args->philo->id);
 	pthread_mutex_lock(&args->time[args->philo->id - 1]);
 	args->philo->last_meal = current_time();
@@ -83,14 +91,17 @@ void	eat_eta(t_info *args)
 	pthread_mutex_lock(&args->eating[args->philo->id - 1]);
 	args->philo->meal_eated++;
 	pthread_mutex_unlock(&args->eating[args->philo->id - 1]);
-	pthread_mutex_lock(&args->forks[args->philo->fork_left]);
+	pthread_mutex_lock(&args->forks[args->philo->id]);
 	print_routine(args, "has take a fork", args->philo->id);
-	pthread_mutex_lock(&args->forks[args->philo->fork_right]);
-	print_routine(args, "has taken a fork", args->philo->id);
-	usleep(args->tm_to_eat * 1000);
-	pthread_mutex_unlock(&args->forks[args->philo->fork_left]);
-	pthread_mutex_unlock(&args->forks[args->philo->fork_right]);
+	// pthread_mutex_lock(&args->forks[(args->philo->id+1) % args->nbr_of_philos]);
+	print_routine(args, "has take a fork", args->philo->id);
+	// printf("yy\n");
+	usleep(args->tm_to_eat);
+	// printf("nnnn\n");
+	pthread_mutex_unlock(&args->forks[args->philo->id]);
+	// pthread_mutex_unlock(&args->forks[(args->philo->id+1) % args->nbr_of_philos]);
 	// args->philo->time_of_eats++;
+	return (0);
 }
 
 // int	died_thanatos(t_info *args)
@@ -105,7 +116,7 @@ void	eat_eta(t_info *args)
 int check_died(t_info *args)
 {
 	pthread_mutex_lock(&args->is_died);
-	while ((args->tm_to_die) == 1)
+	if ((args->tm_to_die) == 1)
 	{
 		pthread_mutex_unlock(&args->is_died);
 		return (1);

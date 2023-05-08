@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/07 07:04:14 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:09:15 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int			init_main(t_info *args, char **av);
 /*########## functions to start   #########*/
 void	*start_routine(void *i);
 int		start_thread(t_info *args);
-void	sleep_hypnos(t_info *args);
-void	eat_eta(t_info *args);
-int		died_thanatos(t_info *args);
-void	think_descartes(t_info *args);
+int		sleep_hypnos(t_info *args);
+int		eat_eta(t_info *args);
+// int		died_thanatos(t_info *args);
+int		think_descartes(t_info *args);
 int		check_died(t_info *args);
 /*####### functions to utils #######*/
 int			ft_atoi(const char *str);

@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:30:08 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/07 05:53:22 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:28:50 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,26 @@ void	*start_routine(void *i)
 
 	philo = (t_philo *)i;
 	args = philo->info;
-	// if (philo->id % 2 == 0)
-	// 	usleep(1500);
-	// if (args->philo->id % 2  == 0)
-	// 	think_descartes(args);
+	if (philo->id + 1 % 2 == 0)
+		usleep(1500);
 	while (1)
 	{
-		// if (!check_died(args))
-		// 	return (NULL);
-		think_descartes(args);
-		eat_eta(args);
-		if (check_died(args) == 0)
-			sleep_hypnos(args);
+		if (think_descartes(args) == 1)
+		{
+			printf("no\n");
+			return (NULL);
+		}
+		if(eat_eta(args) == 1)
+		{
+			printf("no\n");
+			return (NULL);
+		}
+		if (sleep_hypnos(args) == 1)
+		{
+			printf("no\n");
+			return (NULL);
+		}
 	}
-	// return (NULL);
 }
 
 int	start_thread(t_info *args)
@@ -50,7 +56,7 @@ int	start_thread(t_info *args)
 		args->philo[i].time_of_eats = 0;
 		args->philo[i].last_meal = current_time();
 		pthread_create(&args->philo[i].nbr_of_philos, NULL, &start_routine, &args->philo[i]);
-		usleep(100);
+		usleep(200);
 		// if (pthread_create(&args->philo[i].nbr_of_philos, NULL, &start_routine,
 		// 		&args->philo[i]))
 		// 	return (0);
@@ -58,7 +64,6 @@ int	start_thread(t_info *args)
 		// 	break ;
 		i += 2;
 	}
-	usleep(args->tm_to_eat / 4);
 	i = 1;
 	while (i < args->nbr_of_philos)
 	{
