@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/08 20:09:15 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/10 01:26:50 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef struct s_info
 	pthread_mutex_t	*time;
 	pthread_mutex_t	*eating;
 } t_info;
+
+void		my_usleep(int time);
+
 
 /*####### functions to check arguments #######*/
 void		check_positive(char **av);

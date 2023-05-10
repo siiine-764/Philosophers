@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:30:08 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/08 20:28:50 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/10 02:22:12 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,25 @@ void	*start_routine(void *i)
 	philo = (t_philo *)i;
 	args = philo->info;
 	if (philo->id + 1 % 2 == 0)
-		usleep(1500);
+		my_usleep(1);
 	while (1)
 	{
+		printf("\n\n%d\n\n", philo->id+1);
 		if (think_descartes(args) == 1)
 		{
 			printf("no\n");
-			return (NULL);
+			// return (NULL);
 		}
 		if(eat_eta(args) == 1)
 		{
 			printf("no\n");
-			return (NULL);
+			// return (NULL);
 		}
 		if (sleep_hypnos(args) == 1)
 		{
+			printf("---------------\n");
 			printf("no\n");
-			return (NULL);
+			// return (NULL);
 		}
 	}
 }

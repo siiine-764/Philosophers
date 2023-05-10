@@ -15,6 +15,9 @@ $(NAME) : $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "make it"
 
+# $(NAME) : $(OBJS)
+# 	@$(CC) $(CFLAGS) -fsanitize=thread $(OBJS) -o $(NAME)
+
 clean:
 	@rm -f $(OBJS)
 	@echo "clean"
