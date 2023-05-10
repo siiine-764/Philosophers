@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/10 01:36:28 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/10 22:34:00 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	print_routine(t_info *args, char *a, int i)
 
 int	sleep_hypnos(t_info *args)
 {
-	print_routine(args, "is sleeping", args->philo->id + 1);
+	print_routine(args, "is sleeping", args->philo->id);
 	usleep(args->tm_to_slp);
 	if (check_died(args) == 1)
 	{
@@ -88,7 +88,7 @@ int	sleep_hypnos(t_info *args)
 
 int	think_descartes(t_info *args)
 {
-	print_routine(args, "is thinking", args->philo->id + 1);
+	print_routine(args, "is thinking", args->philo->id);
 	if (check_died(args) == 1)
 		return(1);
 	return(0);
@@ -99,10 +99,10 @@ int	eat_eta(t_info *args)
 	// if (check_died(args) == 1)
 	// 	return(1);
 	pthread_mutex_lock(&args->forks[args->philo->id]);
-	print_routine(args, "has take a fork", args->philo->id+1);
+	print_routine(args, "has take a fork", args->philo->id);
 	pthread_mutex_lock(&args->forks[(args->philo->id+1) % args->nbr_of_philos]);
-	print_routine(args, "has take a fork", args->philo->id+1);
-	print_routine(args, "is eating", args->philo->id+1);
+	print_routine(args, "has take a fork", args->philo->id);
+	print_routine(args, "is eating", args->philo->id);
 	args->philo->last_meal = current_time();
 	my_usleep(args->tm_to_eat);
 	args->philo->meal_eated++;

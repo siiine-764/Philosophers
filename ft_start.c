@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:30:08 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/10 02:22:12 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/10 22:31:28 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	*start_routine(void *i)
 
 	philo = (t_philo *)i;
 	args = philo->info;
-	if (philo->id + 1 % 2 == 0)
+	// printf("%d", args->philo->id);
+	if (philo->id % 2 == 0)
 		my_usleep(1);
 	while (1)
 	{
-		printf("\n\n%d\n\n", philo->id+1);
+		// printf("\n\n%d\n\n", philo->id+1);
 		if (think_descartes(args) == 1)
 		{
 			printf("no\n");
@@ -36,7 +37,7 @@ void	*start_routine(void *i)
 		}
 		if (sleep_hypnos(args) == 1)
 		{
-			printf("---------------\n");
+			// printf("---------------\n");
 			printf("no\n");
 			// return (NULL);
 		}
@@ -50,7 +51,7 @@ int	start_thread(t_info *args)
 	i = 0;
 	while (i < args->nbr_of_philos)
 	{
-		args->philo[i].id = i ;
+		args->philo[i].id = i;
 		args->philo[i].fork_left = (i + 1) % args->nbr_of_philos;
 		args->philo[i].fork_right = i;
 		args->philo[i].meal_eated = 0;

@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:43:00 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/07 07:04:17 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/10 22:32:49 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	init_main(t_info *args, char **av)
 	if (!alloc_args(args, av))
 		return (0);
 	init_args(args, av);
-	// if (pthread_mutex_init(&args->decalre, NULL))
-	// 	return (0);
+	if (pthread_mutex_init(&args->decalre, NULL))
+		return (0);
 	i = 0;
 	while (i < args->nbr_of_philos)
 	{
