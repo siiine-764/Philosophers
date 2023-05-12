@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/12 02:09:48 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/12 15:33:19 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ typedef struct s_info
     long			tm_to_die;
     int             all_eat;
     long            start_tm;
+	int 			*dead;
     t_philo			*philo;
+    pthread_mutex_t	*dead_mut;
+	
     pthread_mutex_t	is_died;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	decalre;
@@ -64,6 +67,7 @@ void	*start_routine(void *i);
 int		start_thread(t_info *args);
 int		sleep_hypnos(t_info *args, int				id);
 int		eat_eta(t_info *args,int				id);
+int		is_died(t_info *args, int i);
 // int		died_thanatos(t_info *args);
 int		think_descartes(t_info *args,int				id);
 int		check_died(t_info *args);

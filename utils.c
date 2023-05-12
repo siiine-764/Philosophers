@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/12 02:09:42 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/12 16:13:52 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,15 +132,15 @@ int check_died(t_info *args)
 	return (0);
 }
 
-// int	is_died(t_info *main, int i)
+// int	is_died(t_info *args, int i)
 // {
 // 	int	ret;
 
-// 	pthread_mutex_lock(&main->decalre);
+// 	pthread_mutex_lock(&args->decalre);
 // 	if (i)
-// 		main->is_died = i;
-// 	ret = main->is_died;
-// 	pthread_mutex_unlock(&main->decalre);
+// 		args->is_died = i;
+// 	ret = args->is_died;
+// 	pthread_mutex_unlock(&args->decalre);
 // 	return (ret);
 // }
 
@@ -150,24 +150,29 @@ void	is_dead(t_info *args)
 	long	tm;
 
 	i = -1;
-	// printf("%ld", args->tm_to_die);
-	// printf("%d", args->nbr_of_philos);
+	// printf("---->%ld\n", args->tm_to_die);
+	// printf("--->%d\n", args->nbr_of_philos);
 	while (++i < args->nbr_of_philos)
 	{
+		*args->dead = 0;
 		pthread_mutex_lock(&args->time[i]);
 		tm = (current_time() - args->philo[i].last_meal);
 		pthread_mutex_unlock(&args->time[i]);
 		if (tm >= args->tm_to_die)
 		{
-			print_routine(args, "is died", i + 1);
-			pthread_mutex_lock(&args->is_died);
-			if (i == 1)
-			{
-				// exit(1);
-				pthread_mutex_unlock(&args->is_died);
-			}
+			print_routine(args, "died", i);
+			// pthread_mutex_lock(&args->decalre);
+			// if (*args->dead != 1)
+			// 	pthread_mutex_unlock(&args->decalre);
+			// is_died(args, i);
+			// pthread_mutex_lock(&args->is_died);
+			// if (i == 1)
+			// {
+			// 	// exit(1);
+			// 	pthread_mutex_unlock(&args->is_died);
+			// }
 			// exit(1);
-			pthread_mutex_unlock(&args->is_died);
+			// pthread_mutex_unlock(&args->is_died);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:43:00 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/12 02:09:54 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/12 15:35:59 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	init_args(t_info *args, char **av)
 {
+	int dead;
 	args->nbr_of_philos = ft_atoi(av[1]);
 	args->tm_to_die = ft_atoi(av[2]);
 	args->tm_to_eat = ft_atoi(av[3]);
 	args->tm_to_slp = ft_atoi(av[4]);
+	args->dead = &dead;
 	// args->is_died = 0;
 	args->all_eat = 0;
 	args->start_tm = current_time();
@@ -41,6 +43,9 @@ int	alloc_args(t_info *args, char **av)
 	args->eating = malloc(ft_atoi(av[1]) * sizeof(pthread_mutex_t));
 	if (!args->eating)
 		return (0);
+	args->dead_mut = malloc(ft_atoi(av[1]) * sizeof(pthread_mutex_t));
+	if (!args->dead_mut)
+		return (0);
 	return (1);
 }
 
@@ -59,6 +64,7 @@ int	init_main(t_info *args, char **av)
 		pthread_mutex_init(&args->forks[i], NULL);
 		pthread_mutex_init(&args->time[i], NULL);
 		pthread_mutex_init(&args->eating[i], NULL);
+		pthread_mutex_init(&args->dead_mut[i], NULL);
 		i++;
 	}
 	return (1);
