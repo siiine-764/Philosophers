@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/10 01:26:50 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:09:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_info
     int             nbr_of_meals;
     int             tm_to_slp;
     int             tm_to_eat;
-    int             tm_to_die;
+    long			tm_to_die;
     int             all_eat;
     long            start_tm;
     t_philo			*philo;
@@ -58,14 +58,14 @@ void		check_positive(char **av);
 void		init_args(t_info *args, char **av);
 int			alloc_args(t_info *args, char **av);
 int			init_main(t_info *args, char **av);
-
+void		is_dead(t_info *args);
 /*########## functions to start   #########*/
 void	*start_routine(void *i);
 int		start_thread(t_info *args);
-int		sleep_hypnos(t_info *args);
-int		eat_eta(t_info *args);
+int		sleep_hypnos(t_info *args, int				id);
+int		eat_eta(t_info *args,int				id);
 // int		died_thanatos(t_info *args);
-int		think_descartes(t_info *args);
+int		think_descartes(t_info *args,int				id);
 int		check_died(t_info *args);
 /*####### functions to utils #######*/
 int			ft_atoi(const char *str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/10 22:34:00 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:09:42 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,43 +66,42 @@ void	my_usleep(int time)
 		usleep(100);
 }
 
-void	print_routine(t_info *args, char *a, int i)
+void	print_routine(t_info *args, char *a, int id)
 {
 	// if (!args->is_died && !args->all_eat)
 	pthread_mutex_lock(&args->decalre);
-	printf("%lld %d %s\n", (current_time() - args->start_tm), i, a);
+	printf("%lld %d %s\n", (current_time() - args->start_tm), id+1, a);
 	pthread_mutex_unlock(&args->decalre);
 }
 
-int	sleep_hypnos(t_info *args)
+int	sleep_hypnos(t_info *args,int				id)
 {
-	print_routine(args, "is sleeping", args->philo->id);
+	print_routine(args, "is sleeping", id);
 	usleep(args->tm_to_slp);
 	if (check_died(args) == 1)
 	{
 		return (1);
 	}
-		printf("\n\n\n\n");
 	return (0);
 }
 
-int	think_descartes(t_info *args)
+int	think_descartes(t_info *args,int				id)
 {
-	print_routine(args, "is thinking", args->philo->id);
+	print_routine(args, "is thinking", id);
 	if (check_died(args) == 1)
 		return(1);
 	return(0);
 }
 
-int	eat_eta(t_info *args)
+int	eat_eta(t_info *args, int				id)
 {
-	// if (check_died(args) == 1)
-	// 	return(1);
+	if (check_died(args) == 1)
+		return(1);
 	pthread_mutex_lock(&args->forks[args->philo->id]);
-	print_routine(args, "has take a fork", args->philo->id);
+	print_routine(args, "has take a fork", id);
 	pthread_mutex_lock(&args->forks[(args->philo->id+1) % args->nbr_of_philos]);
-	print_routine(args, "has take a fork", args->philo->id);
-	print_routine(args, "is eating", args->philo->id);
+	print_routine(args, "has take a fork", id);
+	print_routine(args, "is eating", id);
 	args->philo->last_meal = current_time();
 	my_usleep(args->tm_to_eat);
 	args->philo->meal_eated++;
@@ -131,4 +130,44 @@ int check_died(t_info *args)
 	}
 	pthread_mutex_unlock(&args->is_died);
 	return (0);
+}
+
+// int	is_died(t_info *main, int i)
+// {
+// 	int	ret;
+
+// 	pthread_mutex_lock(&main->decalre);
+// 	if (i)
+// 		main->is_died = i;
+// 	ret = main->is_died;
+// 	pthread_mutex_unlock(&main->decalre);
+// 	return (ret);
+// }
+
+void	is_dead(t_info *args)
+{
+	int		i;
+	long	tm;
+
+	i = -1;
+	// printf("%ld", args->tm_to_die);
+	// printf("%d", args->nbr_of_philos);
+	while (++i < args->nbr_of_philos)
+	{
+		pthread_mutex_lock(&args->time[i]);
+		tm = (current_time() - args->philo[i].last_meal);
+		pthread_mutex_unlock(&args->time[i]);
+		if (tm >= args->tm_to_die)
+		{
+			print_routine(args, "is died", i + 1);
+			pthread_mutex_lock(&args->is_died);
+			if (i == 1)
+			{
+				// exit(1);
+				pthread_mutex_unlock(&args->is_died);
+			}
+			// exit(1);
+			pthread_mutex_unlock(&args->is_died);
+		}
+	}
 }

@@ -1,0 +1,38 @@
+3 1 is thinking
+3 1 has take a fork
+3 1 has take a fork
+3 1 is eating
+6 3 is thinking
+8 5 is thinking
+9 2 is thinking
+12 4 is thinking
+13 2 is died
+13 3 is died
+174 4 is died
+174 5 is died
+174 6 is died
+203 1 is sleeping
+203 3 has take a fork
+203 3 has take a fork
+203 3 is eating
+203 1 is thinking
+403 3 is sleeping
+403 5 has take a fork
+403 5 has take a fork
+403 5 is eating
+403 3 is thinking
+603 5 is sleeping
+603 2 has take a fork
+603 2 has take a fork
+603 2 is eating
+603 5 is thinking
+803 2 is sleeping
+803 4 has take a fork
+803 4 has take a fork
+803 4 is eating
+803 2 is thinking
+1003 4 is sleeping
+1003 1 has take a fork
+1003 1 has take a fork
+1003 1 is eating
+1003 4 is thinking

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_start.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:30:08 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/10 22:31:28 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/12 01:42:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,21 @@ void	*start_routine(void *i)
 
 	philo = (t_philo *)i;
 	args = philo->info;
-	// printf("%d", args->philo->id);
 	if (philo->id % 2 == 0)
 		my_usleep(1);
 	while (1)
 	{
-		// printf("\n\n%d\n\n", philo->id+1);
-		if (think_descartes(args) == 1)
+		if (think_descartes(args, philo->id) == 1)
 		{
-			printf("no\n");
-			// return (NULL);
+			return (NULL);
 		}
-		if(eat_eta(args) == 1)
+		if(eat_eta(args, philo->id) == 1)
 		{
-			printf("no\n");
-			// return (NULL);
+			return (NULL);
 		}
-		if (sleep_hypnos(args) == 1)
+		if (sleep_hypnos(args, philo->id) == 1)
 		{
-			// printf("---------------\n");
-			printf("no\n");
-			// return (NULL);
+			return (NULL);
 		}
 	}
 }
@@ -59,7 +53,7 @@ int	start_thread(t_info *args)
 		args->philo[i].time_of_eats = 0;
 		args->philo[i].last_meal = current_time();
 		pthread_create(&args->philo[i].nbr_of_philos, NULL, &start_routine, &args->philo[i]);
-		usleep(200);
+		usleep(1200);
 		// if (pthread_create(&args->philo[i].nbr_of_philos, NULL, &start_routine,
 		// 		&args->philo[i]))
 		// 	return (0);
@@ -78,7 +72,7 @@ int	start_thread(t_info *args)
 		args->philo[i].time_of_eats = 0;
 		args->philo[i].last_meal = current_time();
 		pthread_create(&args->philo[i].nbr_of_philos, NULL, &start_routine, &args->philo[i]);
-		usleep(200);
+		usleep(1200);
 		i += 2;
 	}
 	return (1);

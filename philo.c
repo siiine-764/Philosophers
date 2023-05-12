@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:36:26 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/10 17:59:39 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:09:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ int	main(int ac, char **av)
 			return (0);
 		}
 		start_thread(args);
+		is_dead(args);
+	// int	i;
+	// i = 0;
+	// while (i < args->nbr_of_philos)
+	// {
+	// 	if (pthread_join(args->philo[i].nbr_of_philos, NULL))
+	// 		return 0;
+	// 	i++;
+	// }
+	// while (i < args->nbr_of_philos)
+	// {
+	// 	pthread_mutex_destroy(&args->forks[i]);
+	// 	pthread_mutex_destroy(&args->eating[i]);
+	// 	pthread_mutex_destroy(&args->time[i]);
+	// 	i++;
+	// }
+	// pthread_mutex_destroy(&args->decalre);
 		// pthread_mutex_lock(&args->decalre);
 		// printf("%lld\n", current_time());
 		// printf("%ld\n", args->start_tm);
