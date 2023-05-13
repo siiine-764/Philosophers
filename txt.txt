@@ -1,61 +1,10 @@
-2 1 is thinking
-436 1 has take a fork
-436 1 has take a fork
-436 1 is eating
-459 3 is thinking
-461 5 is thinking
-462 2 is thinking
-463 4 is thinking
-465 1 died
-465 3 died
-465 5 died
-637 1 is sleeping
-637 3 has take a fork
-637 3 has take a fork
-637 3 is eating
-637 1 is thinking
-837 3 is sleeping
-837 5 has take a fork
-837 5 has take a fork
-837 5 is eating
-837 3 is thinking
-1037 5 is sleeping
-1037 2 has take a fork
-1037 2 has take a fork
-1037 2 is eating
-1037 5 is thinking
-1237 2 is sleeping
-1237 4 has take a fork
-1237 4 has take a fork
-1237 4 is eating
-1237 2 is thinking
-1437 4 is sleeping
-1437 1 has take a fork
-1437 1 has take a fork
-1437 1 is eating
-1437 4 is thinking
-1637 1 is sleeping
-1637 3 has take a fork
-1637 3 has take a fork
-1637 3 is eating
-1637 1 is thinking
-1837 3 is sleeping
-1837 5 has take a fork
-1837 5 has take a fork
-1837 5 is eating
-1837 3 is thinking
-2037 5 is sleeping
-2037 2 has take a fork
-2037 2 has take a fork
-2037 2 is eating
-2037 5 is thinking
-2237 2 is sleeping
-2237 4 has take a fork
-2237 4 has take a fork
-2237 4 is eating
-2237 2 is thinking
-2437 4 is sleeping
-2437 1 has take a fork
-2437 1 has take a fork
-2437 1 is eating
-2437 4 is thinking
+1 1 is thinking
+1 1 has take a fork
+1 1 has take a fork
+1 1 is eating
+3 3 is thinking
+4 5 is thinking
+4 2 is thinking
+6 4 is thinking
+7 1 died
+7 3 died

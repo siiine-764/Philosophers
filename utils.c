@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/12 16:13:52 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/13 14:22:05 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,25 +154,44 @@ void	is_dead(t_info *args)
 	// printf("--->%d\n", args->nbr_of_philos);
 	while (++i < args->nbr_of_philos)
 	{
-		*args->dead = 0;
+		args->bl = 0;
 		pthread_mutex_lock(&args->time[i]);
 		tm = (current_time() - args->philo[i].last_meal);
 		pthread_mutex_unlock(&args->time[i]);
+		// printf("--> tm to die  %ld\n", args->tm_to_die);
+		// printf("-->tm  %ld\n", tm);
+		// printf("-->tm bl  %d\n", args->bl);
+		pthread_mutex_lock(&args->is_died);
 		if (tm >= args->tm_to_die)
 		{
-			print_routine(args, "died", i);
-			// pthread_mutex_lock(&args->decalre);
-			// if (*args->dead != 1)
-			// 	pthread_mutex_unlock(&args->decalre);
-			// is_died(args, i);
+			pthread_mutex_lock(&args->decalre);
+			printf("%lld died\n", (current_time() - args->start_tm));
+			pthread_mutex_unlock(&args->decalre);
+			// // if (args->bl == 1)
+			// // {
+				pthread_mutex_unlock(&args->is_died);
+				// exit (1);
+				// return 1;
+			// // }
+			// // pthread_mutex_unlock(&args->is_died);
+			// pthread_mutex_lock(args->dead_mut);
+			// // if (args->bl == 1)
+			// args->bl = 1;
+			// 	pthread_mutex_unlock(args->dead_mut);
+			// // is_died(args, i);
 			// pthread_mutex_lock(&args->is_died);
-			// if (i == 1)
+			// if (args->bl == 1)
 			// {
-			// 	// exit(1);
 			// 	pthread_mutex_unlock(&args->is_died);
 			// }
-			// exit(1);
 			// pthread_mutex_unlock(&args->is_died);
 		}
+		// if (args->bl == 1)
+		// {
+		// 	if (tm < args->tm_to_die)
+		// 	{
+		// 		print_routine(args, "died", i);
+		// 	}
+		// }
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:30:08 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/12 16:17:22 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/13 12:35:54 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	start_thread(t_info *args)
 		i += 2;
 	}
 	i = 1;
+	args->bl = 0;
 	while (i < args->nbr_of_philos)
 	{
 		args->philo[i].id = i;
@@ -73,6 +74,7 @@ int	start_thread(t_info *args)
 		args->philo[i].last_meal = current_time();
 		pthread_create(&args->philo[i].nbr_of_philos, NULL, &start_routine, &args->philo[i]);
 		usleep(1200);
+		args->bl = 1;
 		i += 2;
 	}
 	return (1);

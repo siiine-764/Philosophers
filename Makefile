@@ -16,8 +16,8 @@ OBJS = $(SRCS:.c=.o)
 # 	@echo "make it"
 
 $(NAME) : $(OBJS)
-	@$(CC) $(CFLAGS) -fsanitize=thread $(OBJS) -o $(NAME)
-
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+#-fsanitize=thread
 clean:
 	@rm -f $(OBJS)
 	@echo "clean"

@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/12 15:33:19 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/13 13:21:53 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_info
     long            start_tm;
 	int 			*dead;
     t_philo			*philo;
+	int				bl;
     pthread_mutex_t	*dead_mut;
 	
     pthread_mutex_t	is_died;
