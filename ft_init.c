@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:43:00 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/12 15:35:59 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/18 21:38:23 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	init_args(t_info *args, char **av)
 {
-	int dead;
+	int	*dead;
+
+	dead = malloc(sizeof(int));
+	dead[0] = 0;
 	args->nbr_of_philos = ft_atoi(av[1]);
 	args->tm_to_die = ft_atoi(av[2]);
 	args->tm_to_eat = ft_atoi(av[3]);
 	args->tm_to_slp = ft_atoi(av[4]);
-	args->dead = &dead;
+	args->dead = dead;
 	// args->is_died = 0;
 	args->all_eat = 0;
 	args->start_tm = current_time();
@@ -40,10 +43,10 @@ int	alloc_args(t_info *args, char **av)
 	args->time = malloc(ft_atoi(av[1]) * sizeof(pthread_mutex_t));
 	if (!args->time)
 		return (0);
-	args->eating = malloc(ft_atoi(av[1]) * sizeof(pthread_mutex_t));
+	args->eating = malloc(sizeof(pthread_mutex_t));
 	if (!args->eating)
 		return (0);
-	args->dead_mut = malloc(ft_atoi(av[1]) * sizeof(pthread_mutex_t));
+	args->dead_mut = malloc(sizeof(pthread_mutex_t));
 	if (!args->dead_mut)
 		return (0);
 	return (1);

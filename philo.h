@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/13 13:21:53 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/18 20:36:29 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_info
     int             nbr_of_meals;
     int             tm_to_slp;
     int             tm_to_eat;
-    long			tm_to_die;
+    int				tm_to_die;
     int             all_eat;
     long            start_tm;
 	int 			*dead;
