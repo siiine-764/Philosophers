@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/18 22:03:49 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/19 22:18:26 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,46 +76,46 @@ void	print_routine(t_info *args, char *a, int id)
 
 int	sleep_hypnos(t_info *args,int				id)
 {
-	pthread_mutex_lock(args->dead_mut);
-	if (args->dead[0] == 1)
-	{
-		pthread_mutex_unlock(args->dead_mut);
-		return (1);
-	}
-	pthread_mutex_unlock(args->dead_mut);
-	print_routine(args, "is sleeping", id);
-	usleep(args->tm_to_slp);
-	// if (check_died(args) == 1)
+	// pthread_mutex_lock(args->dead_mut);
+	// if (args->dead[0] == 1)
 	// {
+	// 	pthread_mutex_unlock(args->dead_mut);
 	// 	return (1);
 	// }
+	// pthread_mutex_unlock(args->dead_mut);
+	print_routine(args, "is sleeping", id);
+	usleep(args->tm_to_slp);
+	if (check_died(args) == 1)
+	{
+		return (1);
+	}
 	return (0);
 }
 
 int	think_descartes(t_info *args,int				id)
 {
-	pthread_mutex_lock(args->dead_mut);
-	if (args->dead[0] == 1)
-	{
-		pthread_mutex_unlock(args->dead_mut);
-		return (1);
-	}
-	pthread_mutex_unlock(args->dead_mut);
+	// pthread_mutex_lock(args->dead_mut);
+	// if (args->dead[0] == 1)
+	// {
+	// 	pthread_mutex_unlock(args->dead_mut);
+	// 	return (1);
+	// }
+	// pthread_mutex_unlock(args->dead_mut);
 	print_routine(args, "is thinking", id);
-	// if (check_died(args) == 1)
-	// 	return(1);
+	if (check_died(args) == 1)
+		return(1);
 	return(0);
 }
 
 int	eat_eta(t_info *args, int				id)
 {
-	pthread_mutex_lock(args->dead_mut);
-	if (args->dead[0] == 1)
-	{
-		pthread_mutex_unlock(args->dead_mut);
-		return (1);
-	}
-	pthread_mutex_unlock(args->dead_mut);
+	// pthread_mutex_lock(args->dead_mut);
+	// if (args->dead[0] == 1)
+	// {
+	// 	pthread_mutex_unlock(args->dead_mut);
+	// 	return (1);
+	// }
+	// pthread_mutex_unlock(args->dead_mut);
 	// if (check_died(args) == 1)
 	// 	return(1);
 	pthread_mutex_lock(&args->forks[args->philo->id]);
@@ -140,6 +140,18 @@ int	eat_eta(t_info *args, int				id)
 // 	// pthread_mutex_unlock(&args->decalre);
 // 	return (i);
 // }
+
+int	is_died(t_info *info, int i)
+{
+	int	ret;
+
+	pthread_mutex_lock(&info->decalre);
+	if (i)
+		info->dead = i;
+	ret = info->dead;
+	pthread_mutex_unlock(&info->decalre);
+	return (ret);
+}
 
 int check_died(t_info *args)
 {
@@ -175,6 +187,8 @@ int check_died1(t_info *args)
 		return (1);
 	}
 	pthread_mutex_unlock(&args->is_died);
+	if (args->nbr_of_meals == 1)
+		check_all_eated(args);
 	return (0);
 }
 void	is_dead(t_info *args)
@@ -191,12 +205,14 @@ void	is_dead(t_info *args)
 		pthread_mutex_lock(&args->is_died);
 		if (tm >= args->tm_to_die)
 		{
-			pthread_mutex_lock(args->dead_mut);
-			args->dead[0] = 1;
-			pthread_mutex_unlock(args->dead_mut);
-			pthread_mutex_lock(&args->decalre);
+			// pthread_mutex_lock(args->dead_mut);
+			// args->dead[0] = 1;
+			// pthread_mutex_unlock(args->dead_mut);
+			// print_routine(args, "died", i);
+			pthread_mutex_lock(&args[i].decalre);
 			printf("%lld %d died\n", current_time() - args->start_tm, i);
-			pthread_mutex_unlock(&args->decalre);
+			pthread_mutex_unlock(&args[i].decalre);
+			is_died(args, 1);
 			// if ( )
 			// {
 			// 	pthread_mutex_unlock(&args->is_died);
@@ -204,4 +220,24 @@ void	is_dead(t_info *args)
 			// }
 		}
 	}
+}
+
+void	check_all_eated(t_info *info)
+{
+	int	i;
+
+	i = -1;
+	while (++i < info->nbr_of_philos)
+	{
+		pthread_mutex_lock(&info->eating[i]);
+		if (info->philo[i].meal_eated < info->nbr_of_meals)
+		{
+			pthread_mutex_unlock(&info->eating[i]);
+			return ;
+		}
+		pthread_mutex_unlock(&info->eating[i]);
+	}
+	pthread_mutex_lock(&info->decalre);
+	info->all_eat = 1;
+	pthread_mutex_unlock(&info->decalre);
 }

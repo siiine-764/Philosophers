@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 03:36:26 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/18 22:11:55 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/19 22:19:50 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ int	main(int ac, char **av)
 		}
 		start_thread(args);
 		// while ((args->tm_to_die) != 1)
-		// 	is_dead(args);
+			// is_dead(args);
 		while (1)
 		{
-			if (current_time() - args[i].philo->last_meal >= args[i].tm_to_die)
+			pthread_mutex_lock(&args->time[i]);
+			long tm = (current_time() - args->philo[i].last_meal);
+			pthread_mutex_unlock(&args->time[i]);
+			if (tm >= args[i].tm_to_die)
 			{
 				// pthread_mutex_lock(&args[i].decalre);
 				// printf("%lld %d died\n", current_time() - args[i].start_tm , i);
@@ -43,9 +46,10 @@ int	main(int ac, char **av)
 				pthread_mutex_lock(&args[i].decalre);
 				printf("%lld %d died\n", current_time() - args->start_tm, i);
 				pthread_mutex_unlock(&args[i].decalre);
-				pthread_mutex_lock(args[i].dead_mut);
-				args[i].dead[0] = 1;
-				pthread_mutex_unlock(args[i].dead_mut);
+				
+				// pthread_mutex_lock(args[i].dead_mut);
+				// args[i].dead[0] = 1;
+				// pthread_mutex_unlock(args[i].dead_mut);
 				break;
 			}
 			i++;
@@ -63,7 +67,6 @@ int	main(int ac, char **av)
 			pthread_mutex_destroy(&args->forks[i]);
 			pthread_mutex_destroy(&args->eating[i]);
 			pthread_mutex_destroy(&args->time[i]);
-			pthread_mutex_destroy(&args->dead_mut[i]);
 			i++;
 		}
 		pthread_mutex_destroy(&args->decalre);

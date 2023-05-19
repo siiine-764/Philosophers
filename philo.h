@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/18 20:36:29 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/19 22:16:01 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ typedef struct s_info
     int				tm_to_die;
     int             all_eat;
     long            start_tm;
-	int 			*dead;
+	int 			dead;
     t_philo			*philo;
 	int				bl;
-    pthread_mutex_t	*dead_mut;
 	
     pthread_mutex_t	is_died;
 	pthread_mutex_t	*forks;
@@ -69,6 +68,7 @@ int		start_thread(t_info *args);
 int		sleep_hypnos(t_info *args, int				id);
 int		eat_eta(t_info *args,int				id);
 int		is_died(t_info *args, int i);
+void	check_all_eated(t_info *info);
 // int		died_thanatos(t_info *args);
 int		think_descartes(t_info *args,int				id);
 int		check_died(t_info *args);
