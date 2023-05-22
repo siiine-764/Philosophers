@@ -6,13 +6,11 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/19 22:18:26 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:15:53 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./philo.h"
-
-
 
 int	ft_atoi(const char *str)
 {
@@ -68,9 +66,9 @@ void	my_usleep(int time)
 
 void	print_routine(t_info *args, char *a, int id)
 {
-	// if (!args->is_died && !args->all_eat)
 	pthread_mutex_lock(&args->decalre);
-	printf("%lld %d %s\n", (current_time() - args->start_tm), id+1, a);
+	if (!args->dead)
+		printf("%lld %d %s\n", (current_time() - args->tm_to_start), id+1, a);
 	pthread_mutex_unlock(&args->decalre);
 }
 
@@ -85,10 +83,10 @@ int	sleep_hypnos(t_info *args,int				id)
 	// pthread_mutex_unlock(args->dead_mut);
 	print_routine(args, "is sleeping", id);
 	usleep(args->tm_to_slp);
-	if (check_died(args) == 1)
-	{
-		return (1);
-	}
+	// if (check_died(args) == 1)
+	// {
+	// 	return (1);
+	// }
 	return (0);
 }
 
@@ -102,8 +100,8 @@ int	think_descartes(t_info *args,int				id)
 	// }
 	// pthread_mutex_unlock(args->dead_mut);
 	print_routine(args, "is thinking", id);
-	if (check_died(args) == 1)
-		return(1);
+	// if (check_died(args) == 1)
+	// 	return(1);
 	return(0);
 }
 
@@ -117,7 +115,12 @@ int	eat_eta(t_info *args, int				id)
 	// }
 	// pthread_mutex_unlock(args->dead_mut);
 	// if (check_died(args) == 1)
-	// 	return(1);
+	// {
+	// 	pthread_mutex_lock(&args->decalre);
+	// 	args->dead = 1;
+	// 	pthread_mutex_unlock(&args->decalre);
+	// 	return (1);
+	// }
 	pthread_mutex_lock(&args->forks[args->philo->id]);
 	print_routine(args, "has take a fork", id);
 	pthread_mutex_lock(&args->forks[(args->philo->id+1) % args->nbr_of_philos]);
@@ -143,82 +146,48 @@ int	eat_eta(t_info *args, int				id)
 
 int	is_died(t_info *info, int i)
 {
-	int	ret;
-
 	pthread_mutex_lock(&info->decalre);
-	if (i)
+	if (i == 1)
 		info->dead = i;
-	ret = info->dead;
 	pthread_mutex_unlock(&info->decalre);
-	return (ret);
+	return (info->dead);
 }
 
-int check_died(t_info *args)
-{
-	pthread_mutex_lock(&args->is_died);
-	if ((args->tm_to_die) == 1)
-	{
-		pthread_mutex_unlock(&args->is_died);
-		return (1);
-	}
-	pthread_mutex_unlock(&args->is_died);
-	return (0);
-}
-
-// int	is_died(t_info *args, int i)
+// int check_died(t_info *args)
 // {
-// 	int	ret;
-
-// 	pthread_mutex_lock(&args->decalre);
-// 	if (i)
-// 		args->is_died = i;
-// 	ret = args->is_died;
-// 	pthread_mutex_unlock(&args->decalre);
-// 	return (ret);
+// 	pthread_mutex_lock(&args->is_died);
+// 	if ((args->dead) == 1)
+// 	{
+// 		pthread_mutex_unlock(&args->is_died);
+// 		return (1);
+// 	}
+// 	pthread_mutex_unlock(&args->is_died);
+// 	return (0);
 // }
 
-
-int check_died1(t_info *args)
-{
-	pthread_mutex_lock(&args->is_died);
-	if ((args->tm_to_die) == 1)
-	{
-		pthread_mutex_unlock(&args->is_died);
-		return (1);
-	}
-	pthread_mutex_unlock(&args->is_died);
-	if (args->nbr_of_meals == 1)
-		check_all_eated(args);
-	return (0);
-}
 void	is_dead(t_info *args)
 {
-	int		i;
-	long	tm;
+	int i;
+	long tm;
 
-	i = -1;
-	while (++i < args->nbr_of_philos)
+	i = 0;
+	tm = 0;
+	while (i < args->nbr_of_philos)
 	{
 		pthread_mutex_lock(&args->time[i]);
 		tm = (current_time() - args->philo[i].last_meal);
 		pthread_mutex_unlock(&args->time[i]);
-		pthread_mutex_lock(&args->is_died);
 		if (tm >= args->tm_to_die)
 		{
-			// pthread_mutex_lock(args->dead_mut);
-			// args->dead[0] = 1;
-			// pthread_mutex_unlock(args->dead_mut);
-			// print_routine(args, "died", i);
 			pthread_mutex_lock(&args[i].decalre);
-			printf("%lld %d died\n", current_time() - args->start_tm, i);
+			if (args->dead == 1)
+				printf("%lld %d died\n", current_time() - args->tm_to_start, i);
 			pthread_mutex_unlock(&args[i].decalre);
 			is_died(args, 1);
-			// if ( )
-			// {
-			// 	pthread_mutex_unlock(&args->is_died);
-			// 	// exit(0);
-			// }
 		}
+		i++;
+		// if (i > args[0].nbr_of_philos)
+		// 	i = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/19 22:16:01 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:14:52 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_info
     int             tm_to_slp;
     int             tm_to_eat;
     int				tm_to_die;
+    long            tm_to_start;
     int             all_eat;
-    long            start_tm;
 	int 			dead;
     t_philo			*philo;
 	int				bl;
@@ -71,7 +71,7 @@ int		is_died(t_info *args, int i);
 void	check_all_eated(t_info *info);
 // int		died_thanatos(t_info *args);
 int		think_descartes(t_info *args,int				id);
-int		check_died(t_info *args);
+// int		check_died(t_info *args);
 /*####### functions to utils #######*/
 int			ft_atoi(const char *str);
 long long	current_time(void);

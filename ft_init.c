@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:43:00 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/19 21:33:10 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:52:30 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	init_args(t_info *args, char **av)
 	args->tm_to_die = ft_atoi(av[2]);
 	args->tm_to_eat = ft_atoi(av[3]);
 	args->tm_to_slp = ft_atoi(av[4]);
-	// args->is_died = 0;
+	args->dead = 0;
 	args->all_eat = 0;
-	args->start_tm = current_time();
+	args->tm_to_start = current_time();
 	if (av[5] != 0)
 		args->nbr_of_meals = ft_atoi(av[5]);
 	else
