@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/22 16:14:52 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/24 22:40:33 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		init_args(t_info *args, char **av);
 int			alloc_args(t_info *args, char **av);
 int			init_main(t_info *args, char **av);
 void		is_dead(t_info *args);
+void		check_dead(t_info *args);
 /*########## functions to start   #########*/
 void	*start_routine(void *i);
 int		start_thread(t_info *args);
