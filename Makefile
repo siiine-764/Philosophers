@@ -6,6 +6,8 @@ SRCS =	philo.c\
 		utils.c\
 		ft_init.c\
 		ft_start.c\
+		check_thread.c\
+		check_input.c\
 
 all: $(NAME)
 
