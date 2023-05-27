@@ -22,7 +22,6 @@ int	main(int ac, char **ag)
 		if (check_arg(ag) == 1)
 			return (1);
 		init_main(&p, ag);
-
 		philo = malloc(sizeof(t_philo) * p.num);
 		if (!philo)
 			return (1);

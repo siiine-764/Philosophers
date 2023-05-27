@@ -23,20 +23,21 @@ void	think_descartes(t_philo *p)
 {
 	print_part(p, "is thinking");
 }
+
 void	eat_eta(t_philo *p)
 {
 	pthread_mutex_lock(p->l_f);
 	print_part(p, "has taken a fork");
 	pthread_mutex_lock(p->r_f);
 	print_part(p, "has taken a fork");
-	pthread_mutex_lock(&p->info->eating[p->info->num]);
+	// pthread_mutex_lock(&p->info->eating[p->info->num]);
 	p->meal = current_time();
-	pthread_mutex_unlock(&p->info->eating[p->info->num]);
+	// pthread_mutex_unlock(&p->info->eating[p->info->num]);
 	my_usleep(p->info->t2e);
 	print_part(p, "is eat");
-	pthread_mutex_lock(&p->info->eating[p->info->num]);
+	// pthread_mutex_lock(&p->info->eating[p->info->num]);
 	p->iter_num++;
-	pthread_mutex_unlock(&p->info->eating[p->info->num]);
+	// pthread_mutex_unlock(&p->info->eating[p->info->num]);
 	pthread_mutex_unlock(p->l_f);
 	pthread_mutex_unlock(p->r_f);
 }
