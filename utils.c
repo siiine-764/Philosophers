@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/24 22:40:22 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:41:33 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	sleep_hypnos(t_philo *p)
 {
-	my_usleep(p->info->t2s);
 	print_part(p, "is sleeping");
+	my_usleep(p->info->t2s);
 }
 
 void	think_descartes(t_philo *p)
@@ -33,8 +33,8 @@ void	eat_eta(t_philo *p)
 	// pthread_mutex_lock(&p->info->eating[p->info->num]);
 	p->meal = current_time();
 	// pthread_mutex_unlock(&p->info->eating[p->info->num]);
+	print_part(p, "is eating");
 	my_usleep(p->info->t2e);
-	print_part(p, "is eat");
 	// pthread_mutex_lock(&p->info->eating[p->info->num]);
 	p->iter_num++;
 	// pthread_mutex_unlock(&p->info->eating[p->info->num]);
@@ -77,7 +77,7 @@ void	my_usleep(long time)
 
 	init = current_time();
 	while (current_time() < init + time)
-		usleep(200);
+		usleep(300);
 }
 
 void	print_part(t_philo *p, char *action)
