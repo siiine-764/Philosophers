@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:59:30 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/24 22:40:33 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:13:22 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_infos
 	int				nbr_of_meals;
 	int				check_meal;
 	int				dead;
-
+	int				bl;
 	pthread_mutex_t	*death;
 	pthread_mutex_t	*eating;
 	pthread_mutex_t	*write;

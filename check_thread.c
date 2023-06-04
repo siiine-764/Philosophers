@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_thread.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/04 22:18:32 by mayache-          #+#    #+#             */
+/*   Updated: 2023/06/04 22:18:36 by mayache-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./philo.h"
 
 int	check_died(t_philo *philo)
@@ -55,13 +67,20 @@ void	check_meals(t_info *p, t_philo *philo)
 	int i;
 
 	i = 0;
+	(void)philo;
 	while (i < p->num)
 	{
 		if((int)philo[i].iter_num < p->nbr_of_meals)
 			return ;
+		if (p->bl == 1)
+		{
+			// printf("--->%d\n", p->nbr_of_meals);
+			p->nbr_of_meals--;
+			philo->info->dead = 1;
+		}
 		i++;
 	}
-	philo->info->dead = 1;
+	// philo->info->dead = 1;
 }
 
 void	ft_check_thread(t_info *p, t_philo *philo)

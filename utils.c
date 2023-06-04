@@ -6,12 +6,11 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 05:28:12 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/31 14:41:33 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:28:02 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./philo.h"
-
 
 void	sleep_hypnos(t_philo *p)
 {
@@ -52,7 +51,7 @@ void	eat_eta(t_philo *p)
 // 		pthread_mutex_lock(&info->eating[i]);
 // 		if (info->philo[i].meal_eated < info->nbr_of_meals)
 // 		{
-// 			pthread_mutex_unlock(&info->eating[i]);
+// 			pthread_mutex_unlo ck(&info->eating[i]);
 // 			return ;
 // 		}
 // 		pthread_mutex_unlock(&info->eating[i]);
@@ -77,7 +76,7 @@ void	my_usleep(long time)
 
 	init = current_time();
 	while (current_time() < init + time)
-		usleep(300);
+		usleep(200);
 }
 
 void	print_part(t_philo *p, char *action)

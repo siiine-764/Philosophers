@@ -6,7 +6,7 @@
 /*   By: mayache- <mayache-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 04:43:00 by mayache-          #+#    #+#             */
-/*   Updated: 2023/05/22 15:52:30 by mayache-         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:13:36 by mayache-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	init_main(t_info *p, char **ag)
 	p->t2s = ft_atoi(ag[4]);
 	p->check_meal = 0;
 	if (ag[5])
+	{
 		p->nbr_of_meals = ft_atoi(ag[5]);
+		p->bl = 1;
+	}
 	else
 		p->nbr_of_meals = -1;
 	p->dead = 0;
